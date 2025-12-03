@@ -9,6 +9,9 @@ cors({
   origin:["http://www.render.com"]
 })
 
+// instalar cookie-parser y requerir    
+
+
 
 //TEMPLATES
   //Establecer ejs como template engine
@@ -24,8 +27,9 @@ app.use(express.urlencoded({ extended: true }));
 
 
 //RUTAS
-
-
+app.use('/admin', require('./routes/admin.route'));
+app.use('/', require('./routes/auth.route'));
+app.use('/user', require('./routes/user.route'));
 
 
 //LISTENER
