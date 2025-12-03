@@ -1,0 +1,17 @@
+/* h1 color rojo para probar que funciona CSS en todas las vistas*/
+h1 {
+    color: red;
+    margin: 20px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+
+img {
+    width: 100%;
+}

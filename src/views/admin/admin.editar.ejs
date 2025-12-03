@@ -1,0 +1,38 @@
+<%- include('../templates/header') %>
+
+<main class="#">
+    
+    <p>Editar una película</p>
+
+    <!--De alguna forma los campos deben aparecer rellenados y poder modificarlos-->
+    
+    <form action="/editMovie/:id" method="POST" enctype="multipart/form-data" class="#" id="#">
+        
+        <label for="titulo">Título</label>
+        <input type="text" id="titulo" name="titulo" required value="<%= pelicula.titulo %>">
+
+        <label for="director">Director</label>
+        <input type="text" id="director" name="director" value="<%= pelicula.director %>">
+
+        <label for="anio">Año</label>
+        <input type="text" id="anio" name="anio" value="<%= pelicula.anio %>">
+
+        <label for="duracion">Duración</label>
+        <input type="text" id="duracion" name="duracion" value="<%= pelicula.duracion %>">
+
+        <label for="genero">Género</label>
+        <input type="text" id="genero" name="genero" value="<%= pelicula.genero %>">
+
+        <label for="imagen_url">Imagen de la Película:</label>
+        <input type="file" id="imagen_url" name="imagen_url" value="<%= pelicula.imagen_url %>">
+
+         <label for="sinopsis">Sinopsis</label>
+        <textarea id="sinopsis" name="sinopsis" rows="6" value="<%= pelicula.sinopsis %>"></textarea>
+        
+        <button type="submit" class="#">Guardar Cambios</button>
+        
+        <a href="/admin/dashboard" class="#">Cancelar</a>
+    </form>
+</main>
+
+<%- include('../templates/footer') %>
