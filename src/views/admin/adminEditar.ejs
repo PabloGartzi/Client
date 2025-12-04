@@ -1,12 +1,13 @@
 <%- include('../templates/header') %>
 
-<main class="#">
+<main class="containerEditar">
     
     <p class="tituloWeb">Editar una película</p>
 
-    <!--De alguna forma los campos deben aparecer rellenados y poder modificarlos-->
+    <!--los campos deben aparecer rellenados y poder modificarlos-->
     
-    <form action="/editMovie/:id" method="POST" enctype="multipart/form-data" class="#" id="#">
+    <form action="/editMovie" method="POST" enctype="multipart/form-data" class="formularioEditar" id="formularioEditar">
+        <input type="hidden" value="<%= pelicula.id %>"> <!--Para que despues podamos coger el id del body-->
         
         <label for="titulo">Título</label>
         <input type="text" id="titulo" name="titulo" required value="<%= pelicula.titulo %>">

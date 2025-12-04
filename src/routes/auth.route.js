@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+
 const { vistaLogin, login, logout, signup, vistaSignup } = require("../controllers/auth.controller");
 
 //vista formulario login (pinta el formulario)
