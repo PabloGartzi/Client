@@ -1,21 +1,24 @@
 const express = require("express");
 const router = express.Router();
+const { isUser} = require("../middelware/isUser");
+
+
 const {    
-    vistaSearch,
+    //vistaSearch,
     search,
-    vistaFavoritos,
     addFavoritos,
     deleteFavorito,
     recoverPassword,
     restorePassword,
-    dashboard,
-    detalleFavorito} = require("../controllers/user.controller");
+    accederFavoritos,
+    detalleFavorito,
+    userDashboard} = require("../controllers/user.controller");
 
 // vista dashboard usuario
-router.get('/dashboard',dashboard)
+router.get('/dashboard',userDashboard)
 
 // vista buscador
-router.get('/search',vistaSearch)
+//router.get('/search',vistaSearch)
 
 // vista resultado buscador
 router.post('/search/:title',search)
@@ -27,7 +30,7 @@ router.get('/recoverpassword', recoverPassword)
  router.put('/restorepassword',restorePassword)
 
 // vista favoritos
-router.get('/favoritos',vistaFavoritos)
+router.get('/favoritos',accederFavoritos)
 
 //guardar en favoritos
 router.post('/anadirFavoritos',addFavoritos)

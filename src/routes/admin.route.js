@@ -1,17 +1,33 @@
 const express = require("express");
 const router = express.Router();
+const {isAdmin}= require('../middelware/isAdmin')
+
 
 // importar controladores
 const {
+    vistaCrearPeli,
     anadirPelicula,
+    vistaEditarPeli,
     editarPelicula,
-    borrarPelicula} = require("../controllers/admin.controller");
+    borrarPelicula,
+    adminDashboard
+} = require("../controllers/admin.controller");
 
-// Ruta crear pelicula
+router.get('/dashboard',adminDashboard)
+// Pintar el fromulario crear pelicula
+
+router.get('/createMovie', vistaCrearPeli)
+
+// Envíar formulario crear película
 
 router.post('/createMovie',anadirPelicula )
 
-//Ruta editar película
+
+// Pintar el fromulario editar pelicula
+
+router.get('/createMovie', vistaEditarPeli)
+
+//Enviar formulario editar película
 
 router.put('/editMovie/:id',editarPelicula)
 

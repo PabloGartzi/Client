@@ -1,10 +1,10 @@
 <%- include('../templates/header') %>
 
-<main class="#">
+<main class="containerCrear">
     
     <p class="tituloWeb">Crear una película</p>
     
-    <form action="/createMovie" method="POST" enctype="multipart/form-data" class="#" id="#">
+    <form action="/createMovie" method="POST" enctype="multipart/form-data" class="formularioCrear" id="formularioCrear">
         
         <label for="titulo">Título</label>
         <input type="text" id="titulo" name="titulo" required>
@@ -27,9 +27,9 @@
          <label for="sinopsis">Sinopsis</label>
         <textarea id="sinopsis" name="sinopsis" rows="6" required></textarea>
         
-        <button type="submit" class="#">Guardar Película</button>
+        <button type="submit" class="btn">Guardar Película</button>
         
-        <a href="/admin/dashboard" class="#">Cancelar</a>
+        <a href="/admin/dashboard">Cancelar</a>
     </form>
 </main>
 

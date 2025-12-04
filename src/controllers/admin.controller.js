@@ -1,4 +1,10 @@
 
+const vistaCrearPeli = async (req, res) => {
+    res.render('/admin/adminCrear.ejs')
+
+}
+
+
 const anadirPelicula = async (req, res) => {
 
     try {
@@ -7,6 +13,12 @@ const anadirPelicula = async (req, res) => {
         
     }
 }
+
+
+const vistaEditarPeli = async (req, res) => {
+    res.render('/admin/adminEditar.ejs')
+}
+
 
 const editarPelicula = async (req, res) => {
     
@@ -25,13 +37,19 @@ const borrarPelicula = async (req, res) => {
         
     }
 }
- const dashboard =async (req,res) => {
-    
-}
+const adminDashboard = (req, res) => {
+    const token = req.cookies.token;
+    console.log(token)
+    res.render("admin/adminDashboard", { user: req.user });
+};
+
+
 
 module.exports = {
+    vistaCrearPeli,
     anadirPelicula,
+    vistaEditarPeli,
     editarPelicula,
     borrarPelicula,
-    dashboard
+    adminDashboard
 }

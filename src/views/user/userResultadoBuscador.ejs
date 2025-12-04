@@ -1,0 +1,47 @@
+<%- include('../templates/header') %>
+    <%- include('../user/userMenu') %>
+
+        <main>
+            <!--Buscador de pelis-->
+            <form action="/search/:title" id="buscadorPelis" class="buscadorPelis">
+                <input type="text" id="buscador" class="buscador" placeholder="Buscar película" autofocus required>
+                <button type="submit" id="botonBuscar" class="btn botonBuscar">Buscar</button>
+            </form>
+
+            <p class="tituloWeb">Resultado de la búsqueda</p>
+
+            <!--Resultado película encontrada o mensaje "No hay película..."-->
+
+            <div class="flexContainer containerResultado">
+
+                <% if (respuesta && respuesta.ok) { %>
+                    <!--No hacemos forEach porque solo debería haber 1 pelicula con ese titulo-->
+                    <% const { imagen_url, titulo, director } = respuesta.data %>
+
+                        <article class="tarjetaPelicula">
+
+                            <div class="img">
+                                <img src="<%= imagen_url %>" alt="<%= titulo %>">
+                            </div>
+
+                            <div class="infoPelicula">
+                                <h2>
+                                    <%= titulo %>
+                                </h2>
+                                <p>
+                                    <%= director %>
+                                </p>
+                            </div>
+                        </article>
+
+                        <% } else { %>
+
+                            <p class="mensajeError">
+                                <%= respuesta?.msg || "No se encontró ninguna película con ese título" %>
+                            </p>
+
+                            <% } %>
+            </div>
+        </main>
+
+        <%- include('../templates/footer') %>

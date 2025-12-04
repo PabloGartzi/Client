@@ -1,0 +1,41 @@
+<%- include('../templates/header') %>
+
+    <%- include('../user/userMenu') %>
+
+        <main>
+
+            <p class="tituloWeb">Mis pelis favoritas</p>
+
+            <!--Aquí van las tarjetas con las pelis guardadas-->
+            <div class="flexContainer containerVariaspelis">
+                <!-- capturar todas las pelis favoritas y hacer un for each para pintarlas -->
+
+                <% if(respuesta.ok) { %>
+
+                    <% respuesta.data.forEach(({ imagen_url, titulo, director })=> { %>
+                        <article class="tarjetaPelicula">
+                            <div class="img">
+                                <img src="<%= imagen_url %>" alt="<%= titulo %>">
+                            </div>
+                            <div class="infoPelicula">
+                                <h2>
+                                    <%= titulo %>
+                                </h2>
+                                <p>
+                                    <%= director %>
+                                </p>
+                            </div>
+                        </article>
+
+                        <% }) %>
+
+                            <% } else { %>
+                                <p class="mensajeError">
+                                    <%= respuesta.msg %>
+                                </p>
+
+                                <% } %>
+            </div>
+        </main>
+
+        <%- include('../templates/footer') %>
