@@ -48,3 +48,7 @@ npm install
 - Git y GitHub  
 - Nodemon  
 - Postman para pruebas de endpoints  
+
+
+### Despligue en Render
+https://peliculas-client-front.onrender.com/
