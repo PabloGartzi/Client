@@ -1,10 +1,9 @@
 
-/*const vistaSearch = async (req, res) => {
-    res.render('/user/userBuscador.ejs')
+const vistaSearch = async (req, res) => {
+    res.render('user/userBuscador')
 }
-*/
 
-const { send } = require("process");
+
 
 const search = async (req, res) => {
     try {
@@ -160,13 +159,12 @@ const restorePassword = async (req, res) => {
 }
 
 const userDashboard = async (req, res) => {
-   
     res.render('user/userDashboard')
 }
 
 
 module.exports = {
-    //vistaSearch,
+    vistaSearch,
     search,
     accederFavoritos,
     detalleFavorito,
