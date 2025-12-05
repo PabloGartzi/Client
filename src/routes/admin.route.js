@@ -16,17 +16,15 @@ const {
 } = require("../controllers/admin.controller");
 
 router.get('/dashboard', auth, isAdmin, adminDashboard)
-// Pintar el fromulario crear pelicula
 
+// Pintar el fromulario crear pelicula
 router.get('/createMovie', auth, isAdmin, vistaCrearPeli)
 
-// Envíar formulario crear película
-
+// Envíar formulario crear película. 
 router.post('/createMovie', auth, isAdmin, anadirPelicula )
 
 
 // Pintar el fromulario editar pelicula
-
 router.get('/editMovie/:id', auth, isAdmin, vistaEditarPeli)
 
 //Enviar formulario editar película
