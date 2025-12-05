@@ -73,9 +73,9 @@ const signup = async (req, res) => {
         
     } catch (error) {
         console.log(error, 'error en registro de usuario')
-
+        res.redirect('/login')
     }
-    res.redirect('/login')
+    
 
 }
 
