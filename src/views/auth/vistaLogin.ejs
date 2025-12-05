@@ -1,19 +1,17 @@
 <%- include('../templates/header') %>
 
-<body>
+    <main class="paginaLogin">
+        <a href="/signup" class="btn btnRegistro">Sign up</a>
+        <h1 class="tituloApp">MovieApp - Login</h1>
 
-    <button>Sign up </button>
-    <h1 class="tituloApp">MovieApp</h1>
+        <form action="/login" method="POST" class="formLogin" id="formLogin">
 
-    <form action="/login" method="POST">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            <label for="password">Contraseña:</label>
+            <input type="password" id="contrasenia" name="contrasenia" required>
+            <button type="submit" class="btn">Log in</button>
+        </form>
+    </main>
 
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
-        <label for="password">Contraseña:</label>
-        <input type="password" id="contrasenia" name="contrasenia" required>
-        <button type="submit">Log in</button>
-    </form>
-
-
-    
-<%- include('../templates/footer') %>
+    <%- include('../templates/footer') %>

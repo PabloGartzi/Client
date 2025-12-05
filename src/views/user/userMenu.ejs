@@ -1,17 +1,36 @@
-<!-- En este archivo hay que realizar el header con el menú hamburguesa del user-->
+<!-- realizar header con el menú hamburguesa del user-->
 
 <%- include('../templates/header') %>
 
     <header class="headerUser">
-        <a href="#" class="">←</a>
-        <button class="">☰</button>
+        <a href="javascript:history.back()" class="flecha"> ← </a>
+        <button class="hamburguesaAbrir" id="Open">☰</button>
+        <nav class="menuHam" id="menuHam">
+
+            <button class="hamburguesaCerrar" id="Close">X</button>
+            <ul class="listaMenuHam">
+                <li><a href="/dashboard">Inicio</a></li>
+                <li><a href="/search">Buscador</a></li>
+                <li><a href="/favoritos">Mis Películas</a></li>
+                <li><a href="/user/logout">Cerrar Sesión</a></li>
+            </ul>
+        </nav>
+         <script>
+            const openMenu = document.getElementById('Open');
+            const closeMenu = document.getElementById('Close');
+            const menuHam = document.getElementById('menuHam');
+            openMenu.addEventListener('click', () => {
+                menuHam.style.opacity = '1';
+                menuHam.style.visibility = 'visible';
+            });
+            closeMenu.addEventListener('click', () => {
+                menuHam.style.opacity = '0';
+                menuHam.style.visibility = 'hidden';
+            });
+        </script>
     </header>
 
-    <aside id="menuLateral" class="menuLateral">
-        <nav>
-            <a href="/dashboard">Inicio</a>
-            <a href="/search">Buscador</a>
-            <a href="/favoritos">Mis Películas</a>
-            <a href="/user/logout" class="#">Cerrar Sesión</a>
-        </nav>
-    </aside>
+    
+    <%- include('../templates/footer') %>
+
+   
