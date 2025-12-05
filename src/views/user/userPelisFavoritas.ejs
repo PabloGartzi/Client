@@ -4,28 +4,38 @@
 
         <main>
 
-            <p class="tituloWeb">Mis pelis favoritas</p>
+            <p class="tituloWeb">Mis películas favoritas</p>
 
             <!--Aquí van las tarjetas con las pelis guardadas-->
             <div class="flexContainer containerVariaspelis">
                 <!-- capturar todas las pelis favoritas y hacer un for each para pintarlas -->
 
-                <% if(respuesta.ok) { %>
+                <% if(respuesta.ok && respuesta.data.length> 0) { %>
 
-                    <% respuesta.data.forEach(({ imagen_url, titulo, director })=> { %>
-                        <article class="tarjetaPelicula">
-                            <div class="img">
-                                <img src="<%= imagen_url %>" alt="<%= titulo %>">
-                            </div>
-                            <div class="infoPelicula">
-                                <h2>
-                                    <%= titulo %>
-                                </h2>
-                                <p>
-                                    <%= director %>
-                                </p>
-                            </div>
-                        </article>
+                    <% respuesta.data.forEach(({ id_peliculas, imagen_url, titulo, director })=> { %>
+                        <!--revisar el id_peliculas, qué nombre se le ha dado en las funciones controladoras -->
+
+                        <a href="/user/favoritos/<%= id_peliculas %>" class="enlacePeliFavorita">
+                            <!--cada tarjetita es un link que me lleva al detalle de esa peli-->
+                            <article class="tarjetaPelicula">
+                                <div class="img">
+                                    <img src="<%= imagen_url %>" alt="<%= titulo %>">
+                                </div>
+                                <div class="infoPelicula">
+                                    <h2>
+                                        <%= titulo %>
+                                    </h2>
+                                    <p>
+                                        <%= director %>
+                                    </p>
+                                </div>
+
+                                <div class="favoritoCorazon">
+                                    <button class="btn-corazon"> ♥ </button>
+                                </div>
+
+                            </article>
+                        </a>
 
                         <% }) %>
 

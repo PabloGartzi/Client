@@ -1,17 +1,17 @@
-<!-- En este archivo hay que realizar el header con el menú hamburguesa del user-->
+<!-- realizar header con el menú hamburguesa del user-->
 
 <%- include('../templates/header') %>
 
     <header class="headerUser">
-        <a href="#" class="">←</a>
-        <button class="">☰</button>
+        <a href="javascript:history.back()" class="flecha"> ← </a>
+        <button class="botonMenu">☰</button>
     </header>
 
-    <aside id="menuLateral" class="menuLateral">
-        <nav>
+    <aside id= "containerMenu" class="containerMenu">
+        <nav id="menuLateral" class="menuLateral">
             <a href="/dashboard">Inicio</a>
             <a href="/search">Buscador</a>
             <a href="/favoritos">Mis Películas</a>
-            <a href="/user/logout" class="#">Cerrar Sesión</a>
+            <a href="/user/logout">Cerrar Sesión</a>
         </nav>
     </aside>

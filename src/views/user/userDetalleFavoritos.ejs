@@ -2,15 +2,34 @@
 
 <%- include('../user/menu.user') %>
 
-        <main>
-            
-                <!-- capturar id, guardar en parametros -->
-            const {id}
+<main>
+    <% if (pelicula) { %>
+        <section class="detallePelicula">
 
-    
-            <!--Aquí debe salir el detalle de la película favorita seleccionada-->
+            <p class="tituloWeb"><%= pelicula.titulo %></p>
 
-            
+            <div class="contenidoDetalle">
+        
+                <div class="infoDetalle">
+                    <p>Director: <%= pelicula.director %></p>
+                    <p>Año: <%= pelicula.anio %></p>
+                    <p>Género: <%= pelicula.genero %></p>
+                    <p>Descripción:</p>
+                    <p><%= pelicula.descripcion %></p>
+
+                    <!-- Botón para quitar de favoritos -->
+                    <form action="/user/quitarFavoritos" method="POST">
+                        <input type="hidden" name="idPelicula" value="<%= pelicula.id %>">
+                        <button class="btn-corazon"> ♥ Quitar de favoritos </button>
+                    </form>
+                </div>
+            </div>
+
+        </section>
+    <% } else { %>
+        <p class="mensajeError"><%= msg %></p>
+    <% } %>
+</main>
 
 
 
@@ -20,6 +39,7 @@
 
 
 
-        </main>
+
+
 
 <%- include('../templates/footer') %>

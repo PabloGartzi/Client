@@ -4,9 +4,9 @@
     
     <p class="tituloWeb">Editar una película</p>
 
-    <!--los campos deben aparecer rellenados y poder modificarlos-->
+    <!--los campos deben aparecer rellenados y poder modificarlos, para ello poner value = pelicula.propiedad-->
     
-    <form action="/editMovie" method="POST" enctype="multipart/form-data" class="formularioEditar" id="formularioEditar">
+    <form action="/editMovie" method="POST" enctype="multipart/form-data" class="formEditar" id="formEditar">
         <input type="hidden" value="<%= pelicula.id %>"> <!--Para que despues podamos coger el id del body-->
         
         <label for="titulo">Título</label>
@@ -32,7 +32,6 @@
         
         <button type="submit" class="#">Guardar Cambios</button>
         
-        <a href="/admin/dashboard" class="#">Cancelar</a>
     </form>
 </main>
 

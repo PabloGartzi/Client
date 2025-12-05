@@ -1,8 +1,3 @@
-/* h1 color rojo para probar que funciona CSS en todas las vistas*/
-h1 {
-    color: red;
-    margin: 20px;
-}
 
 * {
     margin: 0;
@@ -10,6 +5,11 @@ h1 {
     box-sizing: border-box;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
+}
+
+body {
+    font-size: 1.3rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 img {
@@ -20,3 +20,65 @@ header, footer {
     background-color: rgb(33, 33, 33);
     color: white;
 }
+
+.paginaLogin, .paginaRegistro {
+    padding: 70px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    justify-content: center;
+    width: 50%;
+}
+
+.tituloApp {
+    font-size: 2em;
+    margin: 40px;
+    color: #333;
+}
+
+/* Formulario */
+.formLogin, .formRegistro {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.formLogin label, .formRegistro label {
+    font-weight: 600;
+    text-align: left;
+}
+
+.formLogin input, .formRegistro input {
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.formLogin input:focus, .formRegistro input:focus {
+    outline: none; /* Elimina borde por defecto al enfocar */
+}
+
+/* Botones */
+.btn {
+    padding: 12px;
+    background-color: #db7209e5;
+    color: white;
+    font-weight: 600;
+    border: none;
+    border-radius: 9px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background-color: #0a1f3e;
+}
+
+
+.btnLogin, .btnRegistro {
+    justify-self: right;
+}
+
