@@ -82,3 +82,64 @@ header, footer {
     justify-self: right;
 }
 
+
+/*-----------------MENU HAMBURGUESA--------------------------  */
+
+ header {
+            background-color: pink;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 2rem;
+        }
+        .listaMenuHam {
+            list-style-type: none;
+            display: flex;
+            gap: 1rem;
+        }
+        .listaMenuHam li a {
+            text-decoration: none;
+            color: #1C1C1C;
+        }
+        .hamburguesaAbrir,
+        .hamburguesaCerrar {
+            display: none;
+        }
+        @media screen and (max-width: 550px) {
+            .hamburguesaAbrir,
+            .hamburguesaCerrar {
+                display: block;
+                border: 0;
+                font-size: 1.25rem;
+                background-color: transparent;
+                cursor: pointer;
+            }
+            .hamburguesaAbrir {
+                color: #1C1C1C;
+            }
+            .hamburguesaCerrar {
+                color: #ECECEC;
+            }
+            .menuHam {
+                opacity: 0;
+                visibility: hidden;
+                display: flex;
+                flex-direction: column;
+                align-items: end;
+                gap: 1rem;
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                background-color: #1C1C1C;
+                padding: 2rem;
+                box-shadow: 0 0 0 100vmax rgba(0, 0, 0, .5);
+            }
+            .listaMenuHam {
+                flex-direction: column;
+                align-items: end;
+            }
+            .listaMenuHam li a {
+                color: #ecececec;
+            }
+        }

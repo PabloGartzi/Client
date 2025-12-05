@@ -1,14 +1,29 @@
-<!-- Header con el menú hamburguesa del ADMIN-->
- 
 <%- include('../templates/header') %>
 
-<header class="headerAdmin">
-        <a href="#" class="">←</a>
-        <button class="#">☰</button>
+    <header class="headerUser">
+        <a href="javascript:history.back()" class="flecha"> ← </a>
+        <button class="hamburguesaAbrir" id="Open">☰</button>
+        <nav class="menuHam" id="menuHam">
+
+            <button class="hamburguesaCerrar" id="Close">X</button>
+            <ul class="listaMenuHam">
+                <li><a href="/user/logout">Cerrar Sesión</a></li>
+            </ul>
+        </nav>
+         <script>
+            const openMenu = document.getElementById('Open');
+            const closeMenu = document.getElementById('Close');
+            const menuHam = document.getElementById('menuHam');
+            openMenu.addEventListener('click', () => {
+                menuHam.style.opacity = '1';
+                menuHam.style.visibility = 'visible';
+            });
+            closeMenu.addEventListener('click', () => {
+                menuHam.style.opacity = '0';
+                menuHam.style.visibility = 'hidden';
+            });
+        </script>
     </header>
 
-    <aside id="menuLateral" class="menuLateral">
-        <nav>
-            <a href="/admin/logout" class="#">Cerrar Sesión</a>
-        </nav>
-    </aside>
+    
+    <%- include('../templates/footer') %>
