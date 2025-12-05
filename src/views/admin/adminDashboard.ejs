@@ -1,45 +1,57 @@
 <%- include('../templates/header') %>
 
-<main class="adminDashboard">
+    <main class="adminDashboard">
 
-    <p class="tituloWeb">Mis Películas - Admin Dashboard </p>
-    
-    <button class="botonCrearPeli" >
-        <a href="/createMovie" class="#" >Crear una peli</a>
-    </button>
+        <p class="tituloWeb">Mis Películas - Admin Dashboard </p>
 
-   <!-- Aquí se muestra la lista de películas creadas -->
+        <button class="btn botonCrearPeli">
+            <a href="/createMovie" class="enlaceCrearPeli">Crear una peli</a>
+        </button>
 
-   <div class="flexContainer containerVariaspelis">
-               
-                <% if(respuesta.ok) { %>
+        <!-- Aquí se muestra la lista de películas creadas -->
 
-                    <% respuesta.data.forEach(({ imagen_url, titulo, director })=> { %>
-                        <article class="tarjetaPelicula">
-                            <div class="img">
-                                <img src="<%= imagen_url %>" alt="<%= titulo %>">
-                            </div>
-                            <div class="infoPelicula">
-                                <h2>
-                                    <%= titulo %>
-                                </h2>
-                                <p>
-                                    <%= director %>
-                                </p>
-                            </div>
-                        </article>
+        <div class="flexContainer containerVariaspelis">
 
-                        <% }) %>
+            <% if(respuesta.ok && respuesta.data.length> 0) { %>
 
-                            <% } else { %>
-                                <p class="mensajeError">
-                                    <%= respuesta.msg %>
-                                </p>
+                <% respuesta.data.forEach(({ id_peliculas, imagen_url, titulo, director })=> { %>
+                    <article class="tarjetaPelicula">
+                        <div class="img">
+                            <img src="<%= imagen_url %>" alt="<%= titulo %>">
+                        </div>
+                        <div class="infoPelicula">
+                            <h2>
+                                <%= titulo %>
+                            </h2>
+                            <p>
+                                <%= director %>
+                            </p>
+                        </div>
 
-                                <% } %>
-            </div>
+                        <div class="accionesPelicula">
+                            <!-- Botón editar -->
+                            <a href="/admin/editMovie<%= id_peliculas %>" class="btn-editar">Editar</a>
 
-</main>
+                            <!-- Botón eliminar -->
+                            <form action="/admin/removeMovie" method="POST">
+                                <input type="hidden" name="id_pelicula" value="<%= id_peliculas %>">
+                                <button type="submit" class="btn-borrar">Borrar</button>
+                            </form>
+                        </div>
+
+                    </article>
+
+                    <% }) %>
+
+                        <% } else { %>
+                            <p class="mensajeError">
+                                <%= respuesta.msg %>
+                            </p>s
+
+                            <% } %>
+        </div>
+
+    </main>
 
 
-<%- include('../templates/footer') %>
+    <%- include('../templates/footer') %>

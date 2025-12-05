@@ -5,7 +5,7 @@
             <!--Buscador de pelis-->
             <form action="/search/:title" id="buscadorPelis" class="buscadorPelis">
                 <input type="text" id="buscador" class="buscador" placeholder="Buscar película" autofocus required>
-                <button type="submit" id="botonBuscar" class="btn botonBuscar">Buscar</button>
+                <button type="submit" id="botonBuscar" class="btn botonBuscar">Buscar 🔍</button>
             </form>
 
             <p class="tituloWeb">Resultado de la búsqueda</p>
@@ -16,7 +16,8 @@
 
                 <% if (respuesta && respuesta.ok) { %>
                     <!--No hacemos forEach porque solo debería haber 1 pelicula con ese titulo-->
-                    <% const { imagen_url, titulo, director } = respuesta.data %>
+                    <% const { id_peliculas, imagen_url, titulo, director }=respuesta.data %>
+                    <!--REVISAR EL id_peliculas, NO SE SI FUNCIONA, si se esta capturando en controllers etc-->
 
                         <article class="tarjetaPelicula">
 
@@ -32,12 +33,22 @@
                                     <%= director %>
                                 </p>
                             </div>
+
+                            <!--Botón de favoritos -->
+                            <div class="favorito">
+                                <form action="/user/anadirFavoritos" method="POST">
+                                    <input type="hidden" name="idPelicula" value="<%= id_peliculas %>">
+                                    <!--REVISAR EL id_peliculas, NO SE SI FUNCIONA, si se esta capturando en controllers etc-->
+                                    <button class="btn-corazon"> ♡ </button>
+                                </form>
+                            </div>
+
                         </article>
 
                         <% } else { %>
 
                             <p class="mensajeError">
-                                <%= respuesta?.msg || "No se encontró ninguna película con ese título" %>
+                                <%= respuesta?.msg %>
                             </p>
 
                             <% } %>
