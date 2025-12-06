@@ -15,7 +15,7 @@
                     <% respuesta.data.forEach(({ id_peliculas, imagen_url, titulo, director })=> { %>
                         <!--revisar el id_peliculas, qué nombre se le ha dado en las funciones controladoras -->
 
-                        <a href="/user/favoritos/<%= id_peliculas %>" class="enlacePeliFavorita">
+                        <a href="/user/detalleFavorito/<%= id_peliculas %>" class="enlacePeliFavorita">
                             <!--cada tarjetita es un link que me lleva al detalle de esa peli-->
                             <article class="tarjetaPelicula">
                                 <div class="img">
@@ -29,21 +29,23 @@
                                         <%= director %>
                                     </p>
                                 </div>
-
-                                <div class="favoritoCorazon">
-                                    <button class="btn-corazon"> ♥ </button>
-                                </div>
-
                             </article>
                         </a>
+                        <form action="/user/deleteFavorito" method="POST">
+                            <input type="hidden" name="id_peliculas" value="<%= id_peliculas %>">
+                            <button class="btn-corazon"><%= '♡' %></button>
+                        </form>
 
                         <% }) %>
 
                             <% } else { %>
                                 <p class="mensajeError">
-                                    <%= respuesta.msg %>
+                                    <% if (respuesta.data && respuesta.data.length == 0) { %>
+                                        Aún no tienes películas favoritas.
+                                    <% } else { %>
+                                        <%= respuesta.msg %>
+                                    <% } %>
                                 </p>
-
                                 <% } %>
             </div>
         </main>

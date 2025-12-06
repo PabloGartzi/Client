@@ -7,30 +7,33 @@ const vistaSearch = async (req, res) => {
 
 const search = async (req, res) => {
     try {
-        const { titulo } = req.query;
+        const { titulo } = req.body;
         const token = req.cookies?.token;
-
         if (!token) {
             return res.redirect('/login');
         }
-
-        if (!titulo || titulo.trim() === '') {
-            return res.send("Debes escribir un título para buscar.");
-        }
-
-        const respuesta = await fetch(`http://localhost:4100/user/search?titulo=${encodeURIComponent(titulo)}`, {
-            method: "GET",
-            credentials: "include",
-            headers: {
-                "Content-Type": "application/json"
+        const respuesta = await fetch(
+            `http://localhost:4001/user/search?titulo=${encodeURIComponent(titulo)}`,
+            {
+                method: "GET",
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                },
             }
-        });
+        );
+        console.log(respuesta)
+        if (!respuesta.ok) {
+            return res.render("user/userBuscador.ejs", {
+                error: "No se pudo completar la búsqueda"
+            });
+        }
 
         const data = await respuesta.json();
         console.log("RESULTADO BUSQUEDA:", data);
 
-        return res.render("user/userResultadoBuscador.ejs", {
-            peliculas: data.resultados 
+        res.render("user/userResultadoBuscador.ejs", {
+            respuesta: data,
+            error: null
         });
 
     } catch (error) {
@@ -45,12 +48,10 @@ const addFavoritos = async (req, res) => {
     try {
         const { id_peliculas } = req.body;
         const token = req.cookies?.token;
-        
         if (!token) {
-            return res.redirect('/login');//debemos mandarnos al dashboard, simplemente limpiar o que salga un msg
+            return res.status(401).json({ ok: false, msg: "Usuario no autenticado" });
         }
-        
-        const respuesta = await fetch("http://localhost:4100/user/anadirFavoritos", {
+        const respuesta = await fetch("http://localhost:4001/user/anadirFavoritos", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -58,26 +59,21 @@ const addFavoritos = async (req, res) => {
             },
             body: JSON.stringify({ id_peliculas })
         });
-
+        console.log(respuesta)        
         const data = await respuesta.json();
-
-        if (!respuesta.ok) {
-            
-            req.session.mensaje = data.msg || "Error al agregar a favoritos";
-            return res.redirect("/peliculas");
+        if (respuesta.status == 400) {
+            return deleteFavorito(req, res)
         }
-
-    
+        req.session = req.session || {};
         req.session.mensaje = "Película agregada a favoritos correctamente";
-        return res.redirect("/user/favoritos"); 
+
+        return res.redirect("/user/favoritos")
 
     } catch (error) {
         console.error('Error en addFavoritos:', error);
-        req.session.mensaje = "Error interno del cliente";
-        return res.redirect("/peliculas");
+        return res.status(500)
     }
 };
-
 
 
 const accederFavoritos = async (req, res) => {
@@ -88,7 +84,7 @@ const accederFavoritos = async (req, res) => {
             return res.redirect('/login');
         }
         
-        const respuesta = await fetch("http://localhost:4100/user/favoritos", {
+        const respuesta = await fetch("http://localhost:4001/user/favoritos", {
             method: "GET",
             headers: {
                 "Authorization": `Bearer ${token}`
@@ -98,10 +94,13 @@ const accederFavoritos = async (req, res) => {
         const data = await respuesta.json();
 
         if (!respuesta.ok) {
-            return res.render('user/favoritos');
+            return res.render('user/dashboard');
         }
 
-        return res.render('user/favoritos');
+        return res.render('user/userPelisFavoritas', {
+            respuesta: data, // aquí se usa 'respuesta' en EJS
+            error: null
+        });
 
     } catch (error) {
         console.error('Error en obtenerFavoritos:', error);
@@ -111,44 +110,68 @@ const accederFavoritos = async (req, res) => {
 
 const deleteFavorito = async (req, res) => {
     try {
-        const { id_peliculas } = req.body; // CORRECCIÓN: DELETE /deleteFavorito espera en body
+        const { id_peliculas } = req.body;
         const token = req.cookies?.token;
-        
+        console.log(token)
         if (!token) {
             return res.redirect('/login');
         }
-        
-        const respuesta = await fetch("http://localhost:4100/user/deleteFavorito", {
+
+        const respuesta = await fetch("http://localhost:4001/user/deleteFavorito", {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": `Bearer ${token}`
             },
-            body: JSON.stringify({ id_peliculas })   
+            body: JSON.stringify({ id_peliculas })
         });
 
-        const data = await respuesta.json();
-
         if (!respuesta.ok) {
-            req.session.mensaje = data.msg || 'Error al eliminar de favoritos';
-        } else {
-            req.session.mensaje = 'Película eliminada de favoritos correctamente';
+            return res.redirect('/user/dashboard');
         }
-
-        return res.redirect("/user/favoritos");
+        
+        return res.redirect('/user/favoritos');
 
     } catch (error) {
         console.error('Error en eliminarFavorito:', error);
-        req.session.mensaje = 'Error al eliminar de favoritos';
-        return res.redirect("/user/favoritos");
+        return res.status(500).json({ ok: false, msg: "Error interno del servidor" });
     }
 };
 
 
 
 const detalleFavorito = async (req, res) => {
-res.render('/user/userDetalleFavoritos.ejs')
-}
+    const id = req.params.id;
+            console.log(id)
+    const token = req.cookies.token;
+    if (!token) {
+        return res.redirect('/login');
+    }
+    try {
+        const respuesta = await fetch(`http://localhost:4001/user/dashboard/${id}`, {
+            method: "GET",
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        });
+
+        console.log(respuesta)
+        if (!respuesta.ok) {
+            return res.redirect('/user/dashboard');
+        }
+        const data = await respuesta.json();
+        res.render("user/userDetalleFavoritos", {
+            pelicula: data.data,
+            msg: null
+        });
+    } catch (error) {
+        console.log(error);
+        res.render("user/userDetalleFavoritos", {
+            pelicula: null,
+            msg: "Error en el servidor"
+        });
+    }
+};
 
 const recoverPassword = async (req, res) => {
 
@@ -162,6 +185,13 @@ const userDashboard = async (req, res) => {
     res.render('user/userDashboard')
 }
 
+const logout = (req, res) => {
+    res.clearCookie('token', {
+        httpOnly: true,
+    });
+    return res.redirect('/login');
+};
+
 
 module.exports = {
     vistaSearch,
@@ -173,6 +203,7 @@ module.exports = {
     recoverPassword,
     restorePassword,
     userDashboard,
+    logout
 }
 
 

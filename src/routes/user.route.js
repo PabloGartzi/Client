@@ -13,6 +13,7 @@ const {
     restorePassword,
     accederFavoritos,
     detalleFavorito,
+    logout,
     userDashboard} = require("../controllers/user.controller");
 
 // vista dashboard usuario
@@ -22,7 +23,7 @@ router.get('/dashboard', [auth], userDashboard)
 router.get('/search', [auth], vistaSearch)
 
 // vista resultado buscador
-router.post('/search/:title', [auth], search)
+router.post('/search/pelicula', [auth], search)
 
 // recuperar contraseña
 router.get('/recoverpassword', recoverPassword)
@@ -37,9 +38,13 @@ router.get('/favoritos', [auth], accederFavoritos)
 router.post('/anadirFavoritos', [auth], addFavoritos)
 
 //vista detallada
-router.get('/detalleFavorito',detalleFavorito)
+router.get('/detalleFavorito/:id',detalleFavorito)
 
 //eliminar favoritos
-router.delete('/deleteFavorito', [auth], deleteFavorito)
+router.post('/deleteFavorito', [auth], deleteFavorito)
+
+//logout
+router.get('/logout', [auth], logout);
+
 
 module.exports = router 
