@@ -37,7 +37,7 @@ const vistaLogin = async (req, res) => {
 const login = async (req, res) => {
     try {
         const { email, contrasenia } = req.body;
-        const respuesta = await fetch(`http://localhost:4001/login`, {
+        const respuesta = await fetch('http://localhost:4001/login', {
             method: 'POST',
             body: JSON.stringify({ email: email, contrasenia:contrasenia}),
             headers: {
@@ -104,7 +104,7 @@ const signup = async (req, res) => {
                 msg: "error con las contraseñas"
             });
         }
-        const respuesta = await fetch(`http://localhost:4001/signup`, {
+        const respuesta = await fetch('http://localhost:4001/signup', {
             method: 'POST',
             body: JSON.stringify({ nombre: nombre, email: email, contrasenia: contrasenia }),
             headers: { 'Content-Type': 'application/json' }

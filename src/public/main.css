@@ -58,6 +58,7 @@ footer {
 .paginaLogin,
 .paginaRegistro,
 .containerCrear,
+.containerEditar,
 .formularioCrear,   
 .formMovie,
 .userDashboard,
@@ -67,7 +68,7 @@ footer {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 85%;
+    width: 90%;
     max-width: 750px;
     margin: 2rem auto;
     padding: 1.5rem;
@@ -75,8 +76,6 @@ footer {
     border-radius: 12px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
 }
-
-
 
 /* -------------TITULOS ---------------------*/
 .tituloApp,
@@ -87,7 +86,6 @@ footer {
     margin: 1.5rem 0;
     color: #333;
 }
-
 
 /* -------------TARJETAS PELICULAS------------------- */
 .flexContainer.containerVariaspelis {
@@ -101,7 +99,7 @@ footer {
     margin: 2rem auto;
 }
 
-/* Tarjetas  1 por fila en mobiles */
+/*Tarjetas  1 por fila en mobiles */
 .tarjetaPelicula {
     flex: 1 1 100%;
     max-width: 100%;
@@ -153,6 +151,7 @@ footer {
 .formLogin,
 .formRegistro,
 .formularioCrear,
+.formEditar,
 .formMovie,
 .buscadorPelis {
     display: flex;
@@ -164,6 +163,7 @@ footer {
 .formLogin label,
 .formRegistro label,
 .formularioCrear label,
+.formEditar label,
 .formMovie label,
 .buscadorPelis label {
     font-weight: 600;
@@ -172,8 +172,10 @@ footer {
 .formLogin input,
 .formRegistro input,
 .formularioCrear input,
+.formEditar input,
 .formMovie input,
 .formularioCrear textarea,
+.formEditar textarea,
 .formMovie textarea,
 .buscadorPelis input {
     width: 100%;
@@ -312,6 +314,185 @@ footer {
     .formMovie,
     .mainContainer {
         max-width: 1200px;
+    }
+}
+
+/* ------------------------------------------- 
+ ESTILOS PARA INTEGRAR LA TABLA DEL ADMIN DASHBOARD 
+------------------------------------------- */
+
+/* Aseguramos que el contenedor de la lista ocupe todo el ancho disponible */
+.adminDashboard .listaPeliculas {
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+/* Estilos de tabla para que se vea como una 'tarjeta' */
+.adminDashboard table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); /* Sombra sutil */
+    border-radius: 8px;
+    overflow: hidden; /* Necesario para que border-radius se aplique */
+}
+
+/* Estilos de celdas (TH y TD) */
+.adminDashboard th,
+.adminDashboard td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #eee; /* Separador sutil */
+    font-size: 0.95rem; 
+    vertical-align: middle;
+}
+
+/* Estilo para encabezado de tabla */
+.adminDashboard thead th {
+    background-color: #f6f6f6; /* Fondo gris claro */
+    color: #333; 
+    font-weight: 600;
+    text-transform: uppercase;
+    border-bottom: 2px solid #ccc; 
+}
+
+/* hover en filas */
+.adminDashboard tbody tr:hover {
+    background-color: #fafafa;
+}
+
+/* columna de la imagen */
+.adminDashboard .columnaImagen {
+    width: 80%; 
+    max-width: 80%;
+}
+
+/* Estilo de la imagen de la película */
+.adminDashboard .imagenPeliculaAdmin {
+    max-width: 100%; 
+    height: auto;
+    border-radius: 4px; /* Pequeño redondeo en la miniatura */
+    display: block;
+    object-fit: cover;
+}
+
+/* Estilo para el botón de Crear (.btnCrear del EJS) */
+.adminDashboard .btnCrear {
+    /* Aquí aplicamos estilos que se parezcan a tu clase .btn */
+    display: inline-block;
+    padding: 12px;
+    background-color: #db7209e5; 
+    color: white;
+    font-weight: 600;
+    border: none;
+    border-radius: 9px;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    margin: 0.5rem 0 1rem 0; /* Ajuste de margen superior/inferior */
+    align-self: flex-start; /* Se alinea a la izquierda dentro del contenedor flex */
+    transition: 0.3s;
+}
+
+.adminDashboard .btnCrear:hover {
+     background-color: rgb(85, 84, 84); /* Hover del .btn general */
+}
+
+
+/* Estilos para los botones de acción dentro de la tabla */
+.adminDashboard .btnAccion {
+    /* Mantenemos un estilo base para que se vea bien en la celda */
+    display: inline-block;
+    padding: 6px 10px; /* Reducimos el padding para la tabla */
+    font-size: 0.85rem;
+    border-radius: 6px;
+    margin: 0 6px; /* Espacio entre botones */
+    text-decoration: none;
+    cursor: pointer;
+    transition: 0.3s;
+    font-weight: 400;
+    white-space: nowrap;
+    border: none;
+}
+
+/* estilos existentes para Editar/Borrar  */
+.adminDashboard .btnEditar , .adminDashboard .btnBorrar{
+    background-color: #db7209e5; 
+    color: white;
+}
+
+.adminDashboard .btnEditar:hover {
+    background-color: #09a0be;
+}
+
+.adminDashboard .btnBorrar:hover {
+    background-color: #e53935;
+}
+
+/* --------------------------
+   Tabla Responsive para móviles
+----------------------------*/
+
+@media (max-width: 767px) {
+    /* Convertimos la tabla en tarjeta */
+    .adminDashboard table {
+        display: block;
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    .adminDashboard thead {
+        display: none; /* ocultamos encabezado */
+    }
+
+    .adminDashboard tbody,
+    .adminDashboard tbody tr {
+        display: block;
+        width: 100%;
+        margin: 0 auto 1rem auto;
+        background-color: #fff;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        border-radius: 8px;
+        padding: 15px;
+        text-align: center;
+    }
+
+    .adminDashboard tbody td {
+        border: none;
+        padding: 5px 0;
+        display: block;
+        width: 100%;
+        text-align: center;
+    }
+
+    /* Imagen centrada */
+    .adminDashboard .columnaImagen,
+    .adminDashboard .imagenPeliculaAdmin {
+        width: 120px;
+        height: auto;
+        margin: 0 auto 10px auto;
+        display: block;
+        border-radius: 6px;
+    }
+
+    /* Texto ocupa todo el ancho y letra más grande */
+    .adminDashboard tbody td span {
+        display: block;
+        width: 100%;
+        margin-bottom: 10px;
+        text-align: center;
+        font-size: 1.4rem !important; /* letra más grande en móvil */
+        font-weight: 500;
+    }   
+
+    /* Botones juntos y centrados */
+    .adminDashboard .btnAccion {
+        margin: 0 5px;
+        display: inline-block;
+    }
+
+    .adminDashboard .btnCrear {
+        width: 100%;
     }
 }
 
