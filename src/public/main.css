@@ -314,7 +314,129 @@ footer {
         max-width: 1200px;
     }
 }
+/* ------------------------------dash admin ---------------------------------- */
+/* ... (Se mantiene todo tu CSS previo, incluyendo el bloque de .adminDashboard, .mainContainer, etc.) ... */
 
+/* ------------------------------------------- */
+/* 🚀 ESTILOS PARA INTEGRAR LA TABLA DEL ADMIN DASHBOARD */
+/* ------------------------------------------- */
+
+/* Aseguramos que el contenedor de la lista ocupe todo el ancho disponible */
+.adminDashboard .listaPeliculas {
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+/* Estilos de tabla para que se vea como una 'tarjeta' */
+.adminDashboard table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); /* Sombra sutil */
+    border-radius: 8px;
+    overflow: hidden; /* Necesario para que el border-radius se aplique */
+}
+
+/* Estilos de celdas (TH y TD) */
+.adminDashboard th,
+.adminDashboard td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #eee; /* Separador sutil */
+    font-size: 0.95rem; 
+    vertical-align: middle;
+}
+
+/* Estilo para el encabezado de la tabla */
+.adminDashboard thead th {
+    background-color: #f6f6f6; /* Fondo gris claro */
+    color: #333; 
+    font-weight: 600;
+    text-transform: uppercase;
+    border-bottom: 2px solid #ccc; 
+}
+
+/* Efecto hover en las filas */
+.adminDashboard tbody tr:hover {
+    background-color: #fafafa;
+}
+
+/* Estilo específico para la columna de la imagen */
+.adminDashboard .columnaImagen {
+    width: 80px; 
+    max-width: 80px;
+}
+
+/* Estilo de la imagen de la película */
+.adminDashboard .imagenPeliculaAdmin {
+    max-width: 100%; 
+    height: auto;
+    border-radius: 4px; /* Pequeño redondeo en la miniatura */
+    display: block;
+    object-fit: cover;
+}
+
+/* Estilo para el botón de Crear (.btnCrear del EJS) */
+.adminDashboard .btnCrear {
+    /* Aquí aplicamos estilos que se parezcan a tu clase .btn */
+    display: inline-block;
+    padding: 12px;
+    background-color: #db7209e5; 
+    color: white;
+    font-weight: 600;
+    border: none;
+    border-radius: 9px;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    margin: 0.5rem 0 1rem 0; /* Ajuste de margen superior/inferior */
+    align-self: flex-start; /* Se alinea a la izquierda dentro del contenedor flex */
+    transition: 0.3s;
+}
+
+.adminDashboard .btnCrear:hover {
+     background-color: rgb(85, 84, 84); /* Hover del .btn general */
+}
+
+
+/* Estilos para los botones de acción dentro de la tabla */
+.adminDashboard .btnAccion {
+    /* Mantenemos un estilo base para que se vea bien en la celda */
+    display: inline-block;
+    padding: 6px 10px; /* Reducimos el padding para la tabla */
+    font-size: 0.85rem;
+    border-radius: 6px;
+    margin: 0 3px; /* Espacio entre botones */
+    text-decoration: none;
+    cursor: pointer;
+    transition: 0.3s;
+    font-weight: 400;
+    white-space: nowrap;
+    border: none;
+}
+
+/* Usamos tus estilos existentes para Editar/Borrar en estas nuevas clases */
+.adminDashboard .btnEditar {
+    background-color: #db7209e5; 
+    color: white;
+}
+
+.adminDashboard .btnEditar:hover {
+    background-color: #09a0be;
+}
+
+.adminDashboard .btnBorrar {
+    background-color: #db7209e5;
+    color: white;
+}
+
+.adminDashboard .btnBorrar:hover {
+    background-color: #e53935;
+}
+
+/* ------------------------------------------- */
+
+/* ... (El resto de tu CSS original sigue a continuación) ... */
 /*-----------------MENU HAMBURGUESA--------------------------  */
 
 .listaMenuHam {

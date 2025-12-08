@@ -1,39 +1,39 @@
 <%- include('../templates/header') %>
-<%- include('../admin/adminMenu') %>
+    <%- include('../admin/adminMenu') %>
 
-<main class="containerEditar">
-    
-    <p class="tituloWeb">Editar una película</p>
+        <main class="containerEditar">
 
-    <!--los campos deben aparecer rellenados y poder modificarlos, para ello poner value = pelicula.propiedad-->
-    
-    <form action="/editMovie" method="POST" enctype="multipart/form-data" class="formEditar" id="formEditar">
-        <input type="hidden" value="<%= pelicula.id %>"> <!--Para que despues podamos coger el id del body-->
-        
-        <label for="titulo">Título</label>
-        <input type="text" id="titulo" name="titulo" required value="<%= pelicula.titulo %>">
+            <p class="tituloWeb">Editar una película</p>
 
-        <label for="director">Director</label>
-        <input type="text" id="director" name="director" value="<%= pelicula.director %>">
+            <!--los campos deben aparecer rellenados y poder modificarlos, para ello poner value = pelicula.propiedad-->
 
-        <label for="anio">Año</label>
-        <input type="text" id="anio" name="anio" value="<%= pelicula.anio %>">
+            <form action="/admin/editMovie/<%= pelicula.id %>" method="POST" enctype="multipart/form-data"
+                class="formEditar" id="formEditar">
 
-        <label for="duracion">Duración</label>
-        <input type="text" id="duracion" name="duracion" value="<%= pelicula.duracion %>">
+                <label for="titulo">Título</label>
+                <input type="text" id="titulo" name="titulo" required value="<%= pelicula.titulo %>">
 
-        <label for="genero">Género</label>
-        <input type="text" id="genero" name="genero" value="<%= pelicula.genero %>">
+                <label for="director">Director</label>
+                <input type="text" id="director" name="director" value="<%= pelicula.director %>">
 
-        <label for="imagen">Imagen de la Película:</label>
-        <input type="file" id="imagen" name="imagen" value="<%= pelicula.imagen %>">
+                <label for="anio">Año</label>
+                <input type="text" id="anio" name="anio" value="<%= pelicula.anio %>">
 
-         <label for="sinopsis">Sinopsis</label>
-        <textarea id="sinopsis" name="sinopsis" rows="6" value="<%= pelicula.sinopsis %>"></textarea>
-        
-        <button type="submit" class="#">Guardar Cambios</button>
-        
-    </form>
-</main>
+                <label for="duracion_en_min">Duración</label>
+                <input type="text" id="duracion_en_min" name="duracion_en_min" value="<%= pelicula.duracion_en_min %>">
 
-<%- include('../templates/footer') %>
+                <label for="genero">Género</label>
+                <input type="text" id="genero" name="genero" value="<%= pelicula.genero %>">
+
+                <label for="imagen">Cambiar imagen de la película</label>
+                <input type="file" id="imagen" name="imagen">
+
+                <label for="sinopsis">Sinopsis</label>
+                <textarea id="sinopsis" name="sinopsis" rows="6"><%= pelicula.sinopsis %></textarea>
+
+                <button type="submit" class="#">Guardar Cambios</button>
+
+            </form>
+        </main>
+
+        <%- include('../templates/footer') %>
