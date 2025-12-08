@@ -1,45 +1,49 @@
 <%- include('../templates/header') %>
 
-<%- include('../user/menu.user') %>
+<%- include('../user/userMenu') %>
 
 <main>
+
     <% if (pelicula) { %>
+
+        <p class="tituloWeb"><%= pelicula.titulo %></p>
+
         <section class="detallePelicula">
 
-            <p class="tituloWeb"><%= pelicula.titulo %></p>
-
             <div class="contenidoDetalle">
-        
+
+                <!-- Imagen a la izquierda -->
+                <div class="img img-detalle">
+                    <img src="<%= pelicula.imagen_url %>" alt="<%= pelicula.titulo %>">
+                </div>
+
+                <!-- Información a la derecha -->
                 <div class="infoDetalle">
-                    <p>Director: <%= pelicula.director %></p>
-                    <p>Año: <%= pelicula.anio %></p>
-                    <p>Género: <%= pelicula.genero %></p>
-                    <p>Descripción:</p>
-                    <p><%= pelicula.descripcion %></p>
+
+                    <p><strong>Director:</strong> <%= pelicula.director %></p>
+                    <p><strong>Año:</strong> <%= pelicula.anio %></p>
+                    <p><strong>Género:</strong> <%= pelicula.genero %></p>
+
+                    <p><strong>Descripción:</strong></p>
+                    <p><%= pelicula.sinopsis %></p>
 
                     <!-- Botón para quitar de favoritos -->
-                    <form action="/user/quitarFavoritos" method="POST">
-                        <input type="hidden" name="idPelicula" value="<%= pelicula.id %>">
-                        <button class="btn-corazon"> ♥ Quitar de favoritos </button>
+                    <form action="/user/deleteFavorito" method="POST">
+                        <input type="hidden" name="id_peliculas" value="<%= pelicula.id_peliculas %>">
+                        <button class="btn-corazon">♥</button>
                     </form>
+
                 </div>
             </div>
 
         </section>
+
     <% } else { %>
+
         <p class="mensajeError"><%= msg %></p>
+
     <% } %>
+
 </main>
-
-
-
-
-
-
-
-
-
-
-
 
 <%- include('../templates/footer') %>

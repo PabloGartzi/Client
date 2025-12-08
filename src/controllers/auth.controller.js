@@ -1,4 +1,3 @@
-
 const vistaLogin = async (req, res) => {
 
     res.render('auth/vistaLogin.ejs')
@@ -7,17 +6,18 @@ const vistaLogin = async (req, res) => {
 const login = async (req, res) => {
     try {
         const { email, contrasenia } = req.body;
-        const respuesta = await fetch('http://localhost:4001/login', {
+        const respuesta = await fetch(`http://localhost:4001/login`, {
             method: 'POST',
-            body: JSON.stringify({ email: email, contrasenia: contrasenia }),
+            body: JSON.stringify({ email: email, contrasenia:contrasenia}),
             headers: {
                 'Content-Type': 'application/json',
-                // 'Authorization': 'Bearer token' 
+                'Authorization': 'Bearer token' 
             }
         });
+        console.log
         const data = await respuesta.json()
         if (!respuesta.ok){
-            return res.send("Los datos son incorrectos")
+            return res.redirect('/login')
         }
         const token = data.token
         console.log(token,'<=======================>',data)
@@ -55,13 +55,11 @@ const signup = async (req, res) => {
         console.log('estamos dentro del registro')
         const { nombre, email, contrasenia, confirmar } = req.body;
         if (contrasenia !== confirmar) {
-
-             res.redirect('/signup').json({
-                msg:"error con las constraseñas"
-            })
-
+            return res.status(400).json({
+                msg: "error con las contraseñas"
+            });
         }
-        const respuesta = await fetch('http://localhost:4001/signup', {
+        const respuesta = await fetch(`http://localhost:4001/signup`, {
             method: 'POST',
             body: JSON.stringify({ nombre: nombre, email: email, contrasenia: contrasenia }),
             headers: { 'Content-Type': 'application/json' }
@@ -73,15 +71,17 @@ const signup = async (req, res) => {
         
     } catch (error) {
         console.log(error, 'error en registro de usuario')
-        res.redirect('/login')
+        res.redirect('/signup')
+
     }
-    
+        res.redirect('/user/dashboard')
+
 
 }
 
 const vistaSignup = async (req, res) => {
 
-    res.render('auth/vistaLogin.ejs')
+    res.render('auth/vistaRegistro.ejs')
 }
 
 

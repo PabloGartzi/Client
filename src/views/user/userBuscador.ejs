@@ -1,9 +1,7 @@
-<%- include('../templates/header') %>
+    <%- include('../user/userMenu') %>
 
-    <%- include('../user/menu.user') %>
-
-        <form action="/search/:title" id="buscadorPelis" class="buscadorPelis">
-            <input type="text" id="buscador" class="buscador" placeholder="Buscar película" autofocus required>
+        <form action="search/pelicula" method="POST" id="buscadorPelis" class="buscadorPelis">
+            <input type="text" id="titulo" name="titulo" class="titulo" placeholder="Buscar película" autofocus required>
             <button type="submit" id="botonBuscar" class="btn botonBuscar">Buscar 🔍</button>
         </form>
 
