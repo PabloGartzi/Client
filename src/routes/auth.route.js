@@ -2,7 +2,7 @@
  * Rutas de autenticación para login, logout y registro de usuarios en el frontend.
  * define las rutas de los formularios y envían los datos a la API del backend.
  * Utiliza controladores definidos en auth.controller.js para manejar la lógica de cada ruta.
- * @module routes/auth.route.js
+ * @module routes.auth
  */
 
 const express = require("express");
