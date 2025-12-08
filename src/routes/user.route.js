@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const { isUser} = require("../middelware/isUser");
+const {isUser} = require("../middelware/isUser");
+const {auth} = require("../middelware/auth");
 
 
 const {    
@@ -12,33 +13,38 @@ const {
     restorePassword,
     accederFavoritos,
     detalleFavorito,
+    logout,
     userDashboard} = require("../controllers/user.controller");
 
 // vista dashboard usuario
-router.get('/dashboard',userDashboard)
+router.get('/dashboard', [auth], userDashboard)
 
 // vista buscador
-//router.get('/search',vistaSearch)
+router.get('/search', [auth], vistaSearch)
 
 // vista resultado buscador
-router.post('/search/:title',search)
+router.post('/search/pelicula', [auth], search)
 
 // recuperar contraseña
 router.get('/recoverpassword', recoverPassword)
 
 // cambiar contraseña
- router.put('/restorepassword',restorePassword)
+ router.put('/restorepassword', restorePassword)
 
 // vista favoritos
-router.get('/favoritos',accederFavoritos)
+router.get('/favoritos', [auth], accederFavoritos)
 
 //guardar en favoritos
-router.post('/anadirFavoritos',addFavoritos)
+router.post('/anadirFavoritos', [auth], addFavoritos)
 
 //vista detallada
-router.get('/detalleFavorito',detalleFavorito)
+router.get('/detalleFavorito/:id',detalleFavorito)
 
 //eliminar favoritos
-router.delete('/deleteFavorito',deleteFavorito)
+router.post('/deleteFavorito', [auth], deleteFavorito)
+
+//logout
+router.get('/logout', [auth], logout);
+
 
 module.exports = router 

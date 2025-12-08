@@ -71,8 +71,65 @@ const anadirPelicula = async (req, res) => {
     }
 
 }
+//---------------FUNCION MODIFICADA PARA QUE FUNCIONE SUBIR IMAGENES CON MULTER !!----------------------
 
-// GET al backend: /admin/editMovie/:id
+// const anadirPelicula = async (req, res) => {
+//     try {
+//         const { titulo, anio, director, genero, duracion_en_min, sinopsis } = req.body;
+//         const token = req.cookies?.token;
+
+//         if (!token) {
+//             return res.redirect('/admin/dashboard'); // No autenticado
+//         }
+
+//         // Crear FormData para enviar al backend
+//         const formData = new FormData();
+//         formData.append("titulo", titulo);
+//         formData.append("anio", anio);
+//         formData.append("director", director);
+//         formData.append("genero", genero);
+//         formData.append("duracion_en_min", duracion_en_min);
+//         formData.append("sinopsis", sinopsis);
+
+//         // Si hay imagen subida
+//         if (req.file) {
+//             formData.append("imagen", req.file.buffer, req.file.originalname);
+//         }
+
+//         // Petición al backend
+//         const respuesta = await fetch("http://localhost:4001/admin/createMovie", {
+//             method: "POST",
+//             body: formData,
+//             headers: {
+//                 "Authorization": `Bearer ${token}`
+//             }
+//         });
+
+//         const data = await respuesta.json();
+
+//         if (!respuesta.ok) {
+//             return res.render("admin/adminCrear", { 
+//                 msg: data.msg || "Error al crear la película",
+//                 msgColor: "red"
+//             });
+//         }
+
+//         return res.render("admin/adminDashboard", { 
+//             msg: "Película creada correctamente",
+//             msgColor: "green"
+//         });
+
+//     } catch (error) {
+//         console.error(error);
+//         return res.render("admin/adminCrear", { 
+//             msg: "Error en el servidor",
+//             msgColor: "red"
+//         });
+//     }
+// };
+
+
+// GET /admin/editMovie/:id
 const vistaEditarPeli = async (req, res) => {
     // Funciona bien al poner un h1, pero no se ve la vista porque la variable pelicula no esta definida todavia
     //res.render('admin/adminEditar.ejs')
@@ -146,7 +203,7 @@ const editarPelicula = async (req, res) => {
 }
 
 const borrarPelicula = async (req, res) => {
-    // la prueba con h1 no funciona porque es un delete con id que no tenemos
+   
     try {
         const id = req.params.id;
         const token = req.cookies.token;
