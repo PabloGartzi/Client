@@ -1,4 +1,5 @@
 <%- include('../templates/header') %>
+<%- include('../admin/adminMenu') %>
 
 <main class="containerEditar">
     
@@ -24,8 +25,8 @@
         <label for="genero">Género</label>
         <input type="text" id="genero" name="genero" value="<%= pelicula.genero %>">
 
-        <label for="imagen_url">Imagen de la Película:</label>
-        <input type="file" id="imagen_url" name="imagen_url" value="<%= pelicula.imagen_url %>">
+        <label for="imagen">Imagen de la Película:</label>
+        <input type="file" id="imagen" name="imagen" value="<%= pelicula.imagen %>">
 
          <label for="sinopsis">Sinopsis</label>
         <textarea id="sinopsis" name="sinopsis" rows="6" value="<%= pelicula.sinopsis %>"></textarea>

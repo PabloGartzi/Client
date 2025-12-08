@@ -1,30 +1,31 @@
 <%- include('../templates/header') %>
+<%- include('../admin/adminMenu') %>
 
     <main class="adminDashboard">
 
         <p class="tituloWeb">Mis Películas - Admin Dashboard </p>
 
         <button class="btn botonCrearPeli">
-            <a href="/createMovie" class="enlaceCrearPeli">Crear una peli</a>
+            <a href="/admin/createMovie" class="enlaceCrearPeli">Crear una peli</a>
         </button>
 
         <!-- Aquí se muestra la lista de películas creadas -->
 
         <div class="flexContainer containerVariaspelis">
 
-            <% if(respuesta.ok && respuesta.data.length> 0) { %>
+            <% if(peliculas.ok && peliculas.data.length> 0) { %>
 
-                <% respuesta.data.forEach(({ id_peliculas, imagen_url, titulo, director })=> { %>
+                <% peliculas.data.forEach(({ id_peliculas, imagen_url, titulo, director })=> { %>
                     <article class="tarjetaPelicula">
                         <div class="img">
-                            <img src="<%= imagen_url %>" alt="<%= titulo %>">
+                            <img src="<%= imagen_url %>" alt="Imagen de la película <%=titulo %>">
                         </div>
                         <div class="infoPelicula">
                             <h2>
                                 <%= titulo %>
                             </h2>
                             <p>
-                                <%= director %>
+                                Director: <%= director %>
                             </p>
                         </div>
 
@@ -45,13 +46,12 @@
 
                         <% } else { %>
                             <p class="mensajeError">
-                                <%= respuesta.msg %>
-                            </p>s
+                                <%= " Todavía no hay ninguna película creada" %>
+                            </p>
 
                             <% } %>
         </div>
 
     </main>
-
 
     <%- include('../templates/footer') %>

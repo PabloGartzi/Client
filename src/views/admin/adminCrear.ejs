@@ -1,4 +1,5 @@
 <%- include('../templates/header') %>
+<%- include('../admin/adminMenu') %>
 
 <main class="containerCrear">
     
@@ -15,14 +16,14 @@
         <label for="anio">Año</label>
         <input type="text" id="anio" name="anio" required>
 
-        <label for="duracion">Duración</label>
-        <input type="text" id="duracion" name="duracion" required>
+        <label for="duracion_en_min">Duración</label>
+        <input type="text" id="duracion_en_min" name="duracion_en_min" required>
 
         <label for="genero">Género</label>
         <input type="text" id="genero" name="genero" required>
 
-        <label for="imagen_url">Imagen de la Película:</label>
-        <input type="file" id="imagen_url" name="imagen_url" required>
+        <label for="imagen">Imagen de la Película:</label>
+        <input type="file" id="imagen" name="imagen" required>
 
          <label for="sinopsis">Sinopsis</label>
         <textarea id="sinopsis" name="sinopsis" rows="6" required></textarea>

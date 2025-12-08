@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const SECRET = "mia_clave_secreta";
+const SECRET = "Palabra-secreta";
 
 const auth = (req, res, next) => {
     const token = req.cookies.token;
