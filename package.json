@@ -23,5 +23,8 @@
     "jsonwebtoken": "^9.0.3",
     "multer": "^2.0.2",
     "node-fetch": "^2.7.0"
+  },
+  "devDependencies": {
+    "jsdoc": "^4.0.5"
   }
 }

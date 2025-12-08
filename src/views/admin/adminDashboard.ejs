@@ -1,66 +1,80 @@
 <%- include('../templates/header') %>
-<%- include('./adminMenu') %>
+    <%- include('./adminMenu') %>
 
-<main class="adminDashboard"> 
-    <p class="tituloWeb">Panel de Administración de Películas</p>
+        <main class="adminDashboard">
+            <p class="tituloWeb">Panel de Administración de Películas</p>
 
-    <% if (mensaje) { %>
-        <div class="alert alert-success" style="padding: 15px; background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; margin-bottom: 20px;">
-            <%= mensaje %>
-        </div>
-    <% } %>
+            <% if (mensaje) { %>
+                <div class="alert alert-success"
+                    style="padding: 15px; background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; margin-bottom: 20px;">
+                    <%= mensaje %>
+                </div>
+                <% } %>
 
-    <% if (error) { %>
-        <div class="alert alert-danger" style="padding: 15px; background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; margin-bottom: 20px;">
-            <%= error %>
-        </div>
-    <% } %>
-    <div class="listaPeliculas">
-        <a href="/admin/createMovie" class="btnCrear">Crear Nueva Película</a>
-         
-        <% if (peliculas && peliculas.length > 0) { %>
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Imagen</th> <th>Título</th>
-                        <th>Director</th>
-                        <th>Año</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <% peliculas.forEach(pelicula => { %>
-                        <tr>
-                            <td><%= pelicula.id_peliculas %></td>
-                          <td class="columnaImagen">
-    <% if(pelicula.imagen_url) { %>
-        <img src="<%= pelicula.imagen_url %>" alt="Poster de <%= pelicula.titulo %>" class="imagenPeliculaAdmin">
-    <% } else { %>
-        No URL
-    <% } %>
-    <small style="display:block; font-size: 0.7rem; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; max-width: 80px;" title="<%= pelicula.imagen_url %>">
-        URL: <%= pelicula.imagen_url %>
-    </small>
-</td>
-                            <td><%= pelicula.titulo %></td>
-                            <td><%= pelicula.director %></td>
-                            <td><%= pelicula.anio %></td>
-                            <td>
-                                <a href="/admin/editMovie/<%= pelicula.id_peliculas %>" class="btnAccion btnEditar">Editar</a>
+                    <% if (error) { %>
+                        <div class="alert alert-danger"
+                            style="padding: 15px; background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; margin-bottom: 20px;">
+                            <%= error %>
+                        </div>
+                        <% } %>
+                            <div class="listaPeliculas">
+                                <a href="/admin/createMovie" class="btnCrear">Crear Nueva Película</a>
                                  
-                                <form action="/admin/removeMovie/<%= pelicula.id_peliculas %>" method="POST" style="display:inline;" onsubmit="return confirm('¿Estás seguro de que quieres eliminar esta película?');">
-                                    <button type="submit" class="btnAccion btnBorrar">Borrar</button>
-                                </form>
-                            </td>
-                        </tr>
-                    <% }); %>
-                </tbody>
-            </table>
-        <% } else { %>
-            <p>No hay películas para mostrar en este momento.</p>
-        <% } %>
-    </div>
-</main>
+                                <% if (peliculas && peliculas.length> 0) { %>
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Imagen</th>
+                                                <th>Título</th>
+                                                <th>Director</th>
+                                                <th>Año</th>
+                                                <th>Acciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <% peliculas.forEach(pelicula=> { %>
+                                                <tr>
+                                                    <td>
+                                                        <%= pelicula.id_peliculas %>
+                                                    </td>
+                                                    <td class="columnaImagen">
+                                                        <% if (pelicula.imagen_url) { %>
 
-<%- include('../templates/footer') %>
+                                                            <img src="<%= pelicula.imagen_url %>"
+                                                                alt="Poster de <%= pelicula.titulo %>"
+                                                                class="imagenPeliculaAdmin"> <% } else { %>
+                                                            No URL
+                                                            <% } %>
+                                                    </td>
+                                                    <td>
+                                                        <%= pelicula.titulo %>
+                                                    </td>
+                                                    <td>
+                                                        <%= pelicula.director %>
+                                                    </td>
+                                                    <td>
+                                                        <%= pelicula.anio %>
+                                                    </td>
+                                                    <td>
+                                                        <a href="/admin/editMovie/<%= pelicula.id_peliculas %>"
+                                                            class="btnAccion btnEditar">Editar</a>
+                                                         
+                                                        <form action="/admin/removeMovie/<%= pelicula.id_peliculas %>"
+                                                            method="POST" style="display:inline;"
+                                                            onsubmit="return confirm('¿Estás seguro de que quieres eliminar esta película?');">
+                                                            <button type="submit"
+                                                                class="btnAccion btnBorrar">Borrar</button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                                <% }); %>
+                                        </tbody>
+                                    </table>
+                                    <% } else { %>
+                                        <p>No hay películas para mostrar en este momento.</p>
+                                        <% } %>
+                            </div>
+        </main>
+
+        <%- include('../templates/footer') %>
