@@ -86,7 +86,8 @@ header, footer {
 /*-----------------MENU HAMBURGUESA--------------------------  */
 
  header {
-            background-color: pink;
+            background-color: rgb(70, 70, 70);
+            color: white;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -99,7 +100,7 @@ header, footer {
         }
         .listaMenuHam li a {
             text-decoration: none;
-            color: #1C1C1C;
+              color: white;
         }
         .hamburguesaAbrir,
         .hamburguesaCerrar {

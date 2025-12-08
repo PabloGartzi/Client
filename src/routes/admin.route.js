@@ -15,25 +15,25 @@ const {
     adminDashboard
 } = require("../controllers/admin.controller");
 
-router.get('/dashboard', auth, isAdmin, adminDashboard)
+router.get('/dashboard', [auth], /*isAdmin,*/ adminDashboard)
 
 // Pintar el fromulario crear pelicula
-router.get('/createMovie', auth, isAdmin, vistaCrearPeli)
+router.get('/createMovie', [auth], /*isAdmin,*/ vistaCrearPeli)
 
 // Envíar formulario crear película. 
-router.post('/createMovie', auth, isAdmin, anadirPelicula )
+router.post('/createMovie', [auth], /*isAdmin,*/ anadirPelicula )
 
 
 // Pintar el fromulario editar pelicula
-router.get('/editMovie/:id', auth, isAdmin, vistaEditarPeli)
+router.get('/editMovie/:id', [auth], /*isAdmin,*/ vistaEditarPeli)
 
 //Enviar formulario editar película
 
-router.put('/editMovie/:id', auth, isAdmin, editarPelicula)
+router.put('/editMovie/:id', [auth], /*isAdmin,*/ editarPelicula)
 
 //Ruta eliminar pelicula
 
-router.delete('/removeMovie/:id', auth, isAdmin, borrarPelicula)
+router.delete('/removeMovie/:id', [auth], /*isAdmin,*/ borrarPelicula)
 
 
 module.exports = router;

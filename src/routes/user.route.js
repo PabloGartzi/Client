@@ -18,7 +18,7 @@ const {
 router.get('/dashboard',userDashboard)
 
 // vista buscador
-router.get('/search',vistaSearch)
+//router.get('/search',vistaSearch)
 
 // vista resultado buscador
 router.post('/search/:title',search)

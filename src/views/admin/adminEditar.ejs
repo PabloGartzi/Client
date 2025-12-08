@@ -1,4 +1,5 @@
 <%- include('../templates/header') %>
+<%- include('../admin/adminMenu') %>
 
 <main class="containerEditar">
     
@@ -18,8 +19,8 @@
         <label for="anio">Año</label>
         <input type="text" id="anio" name="anio" value="<%= pelicula.anio %>">
 
-        <label for="duracion_en_min">Duración</label>
-        <input type="text" id="duracion_en_min" name="duracion_en_min" value="<%= pelicula.duracion_en_min %>">
+        <label for="duracion">Duración</label>
+        <input type="text" id="duracion" name="duracion" value="<%= pelicula.duracion %>">
 
         <label for="genero">Género</label>
         <input type="text" id="genero" name="genero" value="<%= pelicula.genero %>">
