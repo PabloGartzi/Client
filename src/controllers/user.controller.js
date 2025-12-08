@@ -1,10 +1,39 @@
+/**
+ * Controlador de usuario para frontend.
+ * Incluye funciones para manejar la vista del buscador, búsqueda de películas,
+ * gestión de favoritos, recuperación y restauración de contraseña, y dashboard de usuario.
+ * 
+ * @module controllers/user.controller
+ */
 
+/**
+ * Muestra la vista del formulario de búsqueda de películas.
+ * @memberof module:controllers/user.controller 
+ * @function vistaSearch
+ * @param {object} req 
+ * @param {object} res 
+ */
 const vistaSearch = async (req, res) => {
     res.render('user/userBuscador')
 }
 
 
-
+/**
+ * Recibe los datos del formulario de búsqueda de películas,
+ * envía la solicitud a la API y muestra los resultados en la vista correspondiente.
+ * @memberof module:controllers/user.controller 
+ * @function search
+ * @param {object} req 
+ * @param {object} res 
+ * @param {string} req.body.titulo - Título de la película a buscar.
+ * @param {string} req.cookies.token - Token de autenticación del usuario.
+ * @param {object} respuesta - Respuesta de la API con los resultados de la búsqueda.
+ * @param {object} data - Datos JSON obtenidos de la respuesta de la API.
+ * @param {string} res.render - Renderiza la vista con los resultados o un mensaje de error.
+ * @param {string} token - Token de autenticación del usuario.
+ * @throws {Error} Lanza un error si ocurre un problema durante la búsqueda.
+ * @returns {void}
+ */
 const search = async (req, res) => {
     try {
         const { titulo } = req.body;
@@ -43,7 +72,23 @@ const search = async (req, res) => {
 };
 
 
-
+/**
+ * Añade una película a la lista de favoritos del usuario.
+ * @memberof module:controllers/user.controller
+ * @function addFavoritos
+ * @param {object} req 
+ * @param {object} res 
+ * @param {string} req.body.id_peliculas - ID de la película a añadir a favoritos.
+ * @param {string} req.cookies.token - Token de autenticación del usuario.
+ * @param {object} respuesta - Respuesta de la API tras intentar añadir a favoritos.
+ * @param {object} data - Datos JSON obtenidos de la respuesta de la API.
+ * @param {string} res.redirect - Redirige a la vista de favoritos tras añadir la película. 
+ * @param {string} req.session.mensaje - Mensaje de éxito almacenado en la sesión.
+ * @param {string} token - Token de autenticación del usuario.
+ * @param {number} id_peliculas - ID de la película a añadir a favoritos.
+ * @throws {Error} Lanza un error si ocurre un problema durante el proceso.
+ * @returns {void}
+ */
 const addFavoritos = async (req, res) => {
     try {
         const { id_peliculas } = req.body;
@@ -75,7 +120,20 @@ const addFavoritos = async (req, res) => {
     }
 };
 
-
+/**
+ * Muestra la lista de películas favoritas del usuario.
+ * @memberof module:controllers/user.controller
+ * @function accederFavoritos   
+ * @param {object} req 
+ * @param {object} res 
+ * @param {string} req.cookies.token - Token de autenticación del usuario.
+ * @param {object} respuesta - Respuesta de la API con la lista de favoritos.
+ * @param {object} data - Datos JSON obtenidos de la respuesta de la API.
+ * @param {string} res.render - Renderiza la vista con la lista de favoritos o el dashboard si hay un error.
+ * @param {string} token - Token de autenticación del usuario.
+ * @throws {Error} Lanza un error si ocurre un problema durante el proceso.
+ * @returns {void}
+ */
 const accederFavoritos = async (req, res) => {
     try {
         const token = req.cookies?.token;
@@ -108,6 +166,21 @@ const accederFavoritos = async (req, res) => {
     }
 };
 
+/**
+ * Elimina una película de la lista de favoritos del usuario.
+ * @memberof module:controllers/user.controller
+ * @function deleteFavorito
+ * @param {object} req  
+ * @param {object} res
+ * @param {string} req.body.id_peliculas - ID de la película a eliminar de favoritos.
+ * @param {string} req.cookies.token - Token de autenticación del usuario.
+ * @param {object} respuesta - Respuesta de la API tras intentar eliminar de favoritos.
+ * @param {string} res.redirect - Redirige a la vista de favoritos tras eliminar la película. 
+ * @param {string} token - Token de autenticación del usuario.
+ * @param {number} id_peliculas - ID de la película a eliminar de favoritos.
+ * @throws {Error} Lanza un error si ocurre un problema durante el proceso.
+ * @returns {void}
+ */
 const deleteFavorito = async (req, res) => {
     try {
         const { id_peliculas } = req.body;
@@ -139,7 +212,21 @@ const deleteFavorito = async (req, res) => {
 };
 
 
-
+/**
+ * Muestra los detalles de una película favorita específica.
+ * @memberof module:controllers/user.controller
+ * @function detalleFavorito
+ * @param {object} req 
+ * @param {object} res  
+ * @param {string} req.params.id - ID de la película favorita.
+ * @param {string} req.cookies.token - Token de autenticación del usuario.
+ * @param {object} respuesta - Respuesta de la API con los detalles de la película.
+ * @param {object} data - Datos JSON obtenidos de la respuesta de la API.
+ * @param {string} res.render - Renderiza la vista con los detalles de la película o un mensaje de error.
+ * @param {string} token - Token de autenticación del usuario.
+ * @throws {Error} Lanza un error si ocurre un problema durante el proceso.
+ * @returns {void}
+ */
 const detalleFavorito = async (req, res) => {
     const id = req.params.id;
             console.log(id)
@@ -181,10 +268,29 @@ const restorePassword = async (req, res) => {
 
 }
 
+/**
+ * Muestra el dashboard del usuario.
+ * @memberof module:controllers/user.controller
+ * @function userDashboard
+ * @param {object} req 
+ * @param {object} res 
+ * @param {string} res.render - Renderiza la vista del dashboard del usuario.
+ * @returns {void}
+ */
 const userDashboard = async (req, res) => {
     res.render('user/userDashboard')
 }
 
+/**
+ * Cierra la sesión del usuario.
+ * @memberof module:controllers/user.controller
+ * @function logout
+ * @param {object} req
+ * @param {object} res 
+ * @param {string} res.clearCookie - Elimina la cookie de token de autenticación.
+ * @param {string} res.redirect - Redirige a la vista de login tras cerrar sesión.
+ * @returns {void}
+ */
 const logout = (req, res) => {
     res.clearCookie('token', {
         httpOnly: true,

@@ -1,8 +1,39 @@
+/**
+ * Controladores de autenticación para login, logout y registro de usuarios en el frontend.
+ * Manejan la lógica de las rutas definidas en auth.route.js.
+ * @module controllers/auth.controller.js  
+ */
+
+
+/**
+ * Muestra la vista del formulario de login.
+ * @function vistaLogin
+ * @memberof module:controllers/auth.controller
+ * @param {object} req 
+ * @param {object} res
+ */
 const vistaLogin = async (req, res) => {
 
     res.render('auth/vistaLogin.ejs')
 }
 
+/**
+ * Recoge los datos del formulario de login y los envía a la API para autenticación.
+ * Si la autenticación es exitosa, guarda el token en una cookie y redirige al dashboard correspondiente según el rol del usuario.
+ * @memberof module:controllers/auth.controller
+ * @function login
+ * @param {object} req - Objeto de solicitud HTTP.
+ * @param {object} res - Objeto de respuesta HTTP.
+ * @param {string} req.body.email - Email del usuario.
+ * @param {string} req.body.contrasenia - Contraseña del usuario. 
+ * @param {string} res.cookie.token - Token JWT almacenado en una cookie HTTP-only.
+ * @param {string} res.redirect - Redirige al dashboard de admin o usuario según el rol.
+ * @param {number} rol - Rol del usuario (2 para admin, otro para user).
+ * @param {string} token - Token JWT recibido de la API tras autenticación exitosa.
+ * @param {object} data - Datos de respuesta de la API tras el login.
+ * @returns {void}
+ * @throws {Error} Lanza un error si ocurre un problema durante el proceso de login.
+ */
 const login = async (req, res) => {
     try {
         const { email, contrasenia } = req.body;
@@ -49,6 +80,20 @@ const logout = async (req, res) => {
 
 }
 
+/**
+ * Recoge los datos del formulario de registro y los envía a la API para crear un nuevo usuario.
+ * Por defecto, los usuarios registrados tienen el rol 'user'.
+ * @memberof module:controllers/auth.controller 
+ * @function signup
+ * @param {object} req - Objeto de solicitud HTTP.
+ * @param {object} res - Objeto de respuesta HTTP.
+ * @param {string} req.body.nombre - Nombre del usuario.
+ * @param {string} req.body.email - Email del usuario.
+ * @param {string} req.body.contrasenia - Contraseña del usuario.
+ * @param {string} req.body.confirmar - Confirmación de la contraseña del usuario.
+ * @returns {void}
+ * @throws {Error} Lanza un error si ocurre un problema durante el proceso de registro. 
+ */
 const signup = async (req, res) => {
 
     try {
@@ -79,6 +124,13 @@ const signup = async (req, res) => {
 
 }
 
+/**
+ * Muestra la vista del formulario de registro de usuario.
+ * @function vistaSignup
+ * @memberof module:controllers/auth.controller
+ * @param {object} req   
+ * @param {object} res
+ */
 const vistaSignup = async (req, res) => {
 
     res.render('auth/vistaRegistro.ejs')
