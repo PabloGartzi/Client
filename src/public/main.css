@@ -101,15 +101,21 @@ footer {
 
 /*Tarjetas  1 por fila en mobiles */
 .tarjetaPelicula {
-    flex: 1 1 100%;
-    max-width: 100%;
-    min-width: 250px;
+    /* Mantenemos el flex-basis 100% para que se apilen en móviles */
+    flex: 1 1 100%; 
+    /* Reducimos el ancho MÁXIMO a algo más pequeño, por ejemplo, 200px */
+    max-width: 300px; 
+    /* Usamos margin auto para centrar la tarjeta individualmente en el contenedor si flex-basis no la estira */
+    margin-left: auto; 
+    margin-right: auto;
+    min-width: 150px; /* Aseguramos que no se haga demasiado pequeña */
     border-radius: 12px;
     display: flex;
     flex-direction: column;
     overflow: hidden;
     position: relative;
     transition: transform 0.3s;
+    width: 100%;
 }
 
 .tarjetaPelicula .img img {
@@ -142,9 +148,11 @@ footer {
 }
 
 .favoritoCorazon {
-    position: absolute;
+    /* position: absolute;
     top: 10px;
-    right: 10px;
+    right: 10px; */
+    margin: 10px auto; 
+    text-align: center;
 }
 
 /* --------- FORMULARIOS --------------- */
@@ -184,6 +192,17 @@ footer {
     border: 1px solid #ccc;
     font-size: 1rem;
     transition: border 0.3s, box-shadow 0.3s;
+}
+
+
+
+.img .img-detalle {
+    width: 80%;
+    height: auto;
+    border-radius: 10px;
+    object-fit: cover;
+    object-position: center;
+    justify-content: center;
 }
 
 
@@ -267,12 +286,17 @@ footer {
     border: none;
     cursor: pointer;
     transition: transform 0.3s, background-color 0.3s;
+    display: block; /* O display: inline-block; */
+    margin: 0 auto; /* Para centrarlo si .favoritoCorazon no es el botón en sí */
 }
 
 .btn-corazon:hover {
     background-color: #3877d5;
     transform: scale(1.1);
 }
+
+
+
 
 /* -------------------MEDIA QUERIES  --------------------*/
 
@@ -369,7 +393,7 @@ footer {
 
 /* Estilo de la imagen de la película */
 .adminDashboard .imagenPeliculaAdmin {
-    max-width: 100%; 
+    max-width: 70%; 
     height: auto;
     border-radius: 4px; /* Pequeño redondeo en la miniatura */
     display: block;
