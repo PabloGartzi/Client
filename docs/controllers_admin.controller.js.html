@@ -1,4 +1,32 @@
-/**
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: controllers/admin.controller.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: controllers/admin.controller.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
  * Controlador para las rutas de administración de películas en el frontend.
  * Comunica con la API para gestionar películas mediante fetch y maneja vistas EJS.
  * Utiliza node-fetch para solicitudes HTTP y form-data para envíos con archivos.
@@ -108,7 +136,7 @@ const vistaEditarPeli = async (req, res) => {
         });
         console.log ('hemos traido la info del server')
         const data = await respuesta.json();
-        console.log("<===================DATA======================>", data)
+        console.log("&lt;===================DATA======================>", data)
         if (!respuesta.ok) {
             console.log('estamos aquiiiiiiiiiiiiiiiiii')
             req.session.error = data.msg || "Película no encontrada o error de permisos.";
@@ -151,7 +179,7 @@ const anadirPelicula = async (req, res) => {
         const { titulo, anio, director, genero, duracion_en_min, sinopsis } = req.body;
         
         if (!token) {
-            if (filePath && fs.existsSync(filePath)) fs.unlinkSync(filePath);
+            if (filePath &amp;&amp; fs.existsSync(filePath)) fs.unlinkSync(filePath);
             return res.redirect('/login');
         }
         
@@ -183,7 +211,7 @@ const anadirPelicula = async (req, res) => {
         });
         
         //  Limpiar el archivo temporal de inmediato
-        if (filePath && fs.existsSync(filePath)) fs.unlinkSync(filePath); 
+        if (filePath &amp;&amp; fs.existsSync(filePath)) fs.unlinkSync(filePath); 
 
         if (!respuesta.ok) {
              const errorData = await respuesta.json();
@@ -199,7 +227,7 @@ const anadirPelicula = async (req, res) => {
 
     } catch (error) {
         console.error("Error en anadirPelicula:", error);
-        if (filePath && fs.existsSync(filePath)) fs.unlinkSync(filePath); 
+        if (filePath &amp;&amp; fs.existsSync(filePath)) fs.unlinkSync(filePath); 
         req.session.error = "Error interno del servidor al procesar la subida.";
         return res.redirect('/admin/createMovie');
     }
@@ -225,7 +253,7 @@ const editarPelicula = async (req, res) => {
 
     try {
         if (!token) {
-            if (filePath && fs.existsSync(filePath)) fs.unlinkSync(filePath);
+            if (filePath &amp;&amp; fs.existsSync(filePath)) fs.unlinkSync(filePath);
             return res.redirect('/login');
         }
 
@@ -254,8 +282,8 @@ const editarPelicula = async (req, res) => {
                 ...formData.getHeaders()
             }
         });
-        console.log("<===============================RESPUESTA=================================>",respuesta, "<===============================RESPUESTA=================================>")
-        if (filePath && fs.existsSync(filePath)) fs.unlinkSync(filePath); // Limpiar
+        console.log("&lt;===============================RESPUESTA=================================>",respuesta, "&lt;===============================RESPUESTA=================================>")
+        if (filePath &amp;&amp; fs.existsSync(filePath)) fs.unlinkSync(filePath); // Limpiar
 
         if (!respuesta.ok) {
              const errorData = await respuesta.json();
@@ -271,7 +299,7 @@ const editarPelicula = async (req, res) => {
 
     } catch (error) {
         console.error("Error en editarPelicula:", error);
-        if (filePath && fs.existsSync(filePath)) fs.unlinkSync(filePath);
+        if (filePath &amp;&amp; fs.existsSync(filePath)) fs.unlinkSync(filePath);
         req.session.error = 'Error interno del servidor al actualizar.';
         return res.redirect(`/admin/editMovie/${id}`); 
     }
@@ -324,4 +352,26 @@ module.exports = {
     vistaEditarPeli,
     editarPelicula,
     borrarPelicula,
-}
+}</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="client.module_app.html">app</a></li><li><a href="controllers_admin.module_controller.html">controller</a></li><li><a href="controllers_auth.module_controller.html">controller</a></li><li><a href="controllers_user.module_controller.html">controller</a></li><li><a href="module-uploadTemp.html">uploadTemp</a></li><li><a href="routes.module_admin.html">admin</a></li><li><a href="routes.module_auth.html">auth</a></li><li><a href="routes.module_user.html">user</a></li></ul><h3>Global</h3><ul><li><a href="global.html#auth">auth</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.5</a> on Tue Dec 09 2025 00:53:11 GMT+0100 (hora estándar de Europa central)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

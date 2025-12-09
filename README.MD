@@ -1,46 +1,24 @@
-# Movie App – Frontend  
-Bootcamp Fullstack FT Vitoria · The Bridge · Diciembre 2025
+# Movie App – Cliente (Front-End)
 
-Este repositorio contiene la parte Frontend del proyecto intermedio Movie App, una aplicación web para búsqueda, consulta y gestión de películas con control de acceso para Usuarios y Administradores.
-
-El Frontend está diseñado bajo arquitectura SSR (Server Side Rendering) utilizando EJS, siguiendo buenas prácticas de semántica, accesibilidad, diseño responsive y metodología ágil.
+Aplicación web que permite a los usuarios iniciar sesión, buscar películas, añadir favoritas y ver detalles. Este repositorio contiene la parte cliente, construida con Express y EJS, conectada a un backend externo con autenticación JWT y roles.
 
 ---
+##  Requisitos previos
 
-## Objetivo del proyecto
+- Node.js  
+- Backend de Movie App corriendo en el puerto definido (`serverPort=4001`)  
+- npm o yarn  
 
-Construir la interfaz completa de una aplicación que permita:
-
-- Buscar películas y ver su detalle.  
-- Guardar y gestionar películas favoritas (Usuarios).  
-- Crear, editar y eliminar películas (Administradores).  
-- Gestionar autenticación con JWT y proveedores externos mediante OAuth.  
-- Mostrar vistas diferenciadas según tipo de usuario.  
+> **Nota:** Este frontend depende del backend. Para obtener datos y funcionalidades completas, asegúrate de clonar y ejecutar primero el backend:  
+> [Repositorio Backend Movie App](https://github.com/PabloGartzi/Server)
 
 ---
-## Instalación
-
-1. Clonar el repositorio:
-```bash
-git clone 
-```
-2. Accede al directorio del proyecto desde el CMD o consola de tu ordenador:
-```
-cd Client
-```
-3. Instala las dependencias:
-```
-npm install
-```
-4. Crea un archivo .env a partir del .env.template:
-5. Configura las variables de entorno necesarias en el archivo .env
-
-## Tecnologías utilizadas
+##  Tecnologías usadas
 
 ### Núcleo
 - Node.js  
 - Express.js  
-- EJS (Embedded JavaScript Templates)  
+- EJS 
 - JavaScript  
 
 
@@ -49,6 +27,83 @@ npm install
 - Nodemon  
 - Postman para pruebas de endpoints  
 
+##  Estructura del proyecto
 
-### Despligue en Render
-https://peliculas-client-front.onrender.com/
+src/  
+├── app.js  
+├── routes/  
+├── controllers/  
+├── middlewares/  
+├── views/  
+└── public/  
+
+---
+
+##  Funcionalidades del FRONT
+
+- Login y validación mediante JWT  
+- Buscador de películas  
+- Gestión de favoritos (añadir y eliminar)  
+- Vista de detalles de película  
+- Renderizado dinámico con EJS  
+- Control de acceso según rol (admin/user)  
+
+---
+## Consumo de endpoints del backend
+
+El frontend utiliza la URL base definida en `.env` y consume los siguientes endpoints:
+
+###  Autenticación
+- `POST /auth/login`  
+- `POST /auth/register`  
+- `POST /auth/logout`  
+
+###  Usuario
+- `GET /user/search`  
+- `POST /user/favoritos`  
+- `PUT /user/anadirFavoritos`  
+- `DELETE /user/deleteFavorito`  
+
+###  Administrador
+- `GET /admin/dashboard`  
+- `POST /admin/createMovie`  
+- `PUT /admin/editMovie/:id`  
+- `DELETE /admin/removeMovie/:id`  
+
+> **Importante:** El frontend depende de que el backend esté activo para que estas funcionalidades funcionen correctamente.
+
+### Documentación con JsDocs
+
+Abrir en docs/index.html
+
+##  Instalación
+
+1.  **Clonar el repositorio:**
+    ```bash
+    git clone <url-del-proyecto>
+    ```
+
+2.  **Instalar dependencias:**
+    ```bash
+    npm install
+    ```
+
+3.  **Crear variables de entorno** (Crea un archivo `.env` en la raíz del proyecto):
+    ```
+    PORT=3100
+    serverPort=4001
+    NODE_ENV=production
+    URL_BASE=http://localhost:4001
+    ```
+
+4.  **Iniciar servidor** (Modo desarrollo con Nodemon):
+    ```bash
+    npm run dev
+    ```
+
+
+##  Usuarios de prueba
+| nombre | email           | contrasenia | id_rol |
+|--------|-----------------|-------------|--------|
+| user   | user@gmail.com  | 12345       | 1      |
+| admin  | admin@gmail.com | 12345       | 2      |

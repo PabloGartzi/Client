@@ -9,8 +9,6 @@ const SECRET = "Palabra-secreta";
  * @param {Object} req - Objeto de solicitud de Express. Debe contener las cookies.
  * @param {Object} res - Objeto de respuesta de Express.
  * @param {Function} next - Función para pasar al siguiente middleware.
- * @param {string} req.cookies.token - Token JWT almacenado en las cookies.
- * @param {Object} decoded - Información del usuario decodificada del token JWT.
  */
 const auth = (req, res, next) => {
     const token = req.cookies.token;

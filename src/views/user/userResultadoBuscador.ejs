@@ -1,9 +1,9 @@
 <%- include('../user/userMenu') %>
 
 <main>
-    <form action="/search/pelicula" id="buscadorPelis" class="buscadorPelis">
-        <input type="text" id="titulo" name="titulo" class="titulo" placeholder="Buscar película" autofocus required>
-        <button type="submit" id="botonBuscar" class="btn botonBuscar">Buscar 🔍</button>
+    <form action="/user/search/pelicula" method="POST" id="buscadorPelis" class="buscadorPelis">
+            <input type="text" id="titulo" name="titulo" class="titulo" placeholder="Buscar película" autofocus required>
+            <button type="submit" id="botonBuscar" class="btn botonBuscar">Buscar 🔍</button>
     </form>
 
     <p class="tituloWeb">Resultado de la búsqueda</p>
